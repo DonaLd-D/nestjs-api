@@ -8,6 +8,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { generateDocument } from './doc';
 declare const module: any;
 
 async function bootstrap() {
@@ -20,6 +21,8 @@ async function bootstrap() {
     defaultVersion: '1',
     type: VersioningType.URI,
   });
+
+  generateDocument(app)
 
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalFilters(new AllExceptionsFilter(),new HttpExceptionFilter());
